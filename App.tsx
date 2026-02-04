@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import freeportLogo from './src/assets/freeport.png';
 import { ViewState, MaterialProfile, HistoryItem } from './types';
 import Dashboard from './components/Dashboard';
 import MaterialProfileView from './components/MaterialProfile';
@@ -112,7 +113,7 @@ const App: React.FC = () => {
           <div className="bg-blue-600 p-2 rounded-lg text-white">
             <LayoutGrid size={20} />
           </div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Freeport-McMoRan_Logo.svg/1200px-Freeport-McMoRan_Logo.svg.png" alt="PT Freeport Indonesia" className="h-12" />
+          <img src={freeportLogo} alt="PT Freeport Indonesia" className="h-12" />
         </div>
 
         <div className="flex items-center gap-6">
