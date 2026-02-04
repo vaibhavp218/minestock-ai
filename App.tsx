@@ -112,7 +112,7 @@ const App: React.FC = () => {
           <div className="bg-blue-600 p-2 rounded-lg text-white">
             <LayoutGrid size={20} />
           </div>
-          <span className="text-xl font-bold tracking-tight text-slate-800">Material Inventory <span className="text-blue-600">Directory</span></span>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Freeport-McMoRan_Logo.svg/1024px-Freeport-McMoRan_Logo.svg.png" alt="PT Freeport Indonesia" className="h-10" />
         </div>
 
         <div className="flex items-center gap-6">
@@ -215,7 +215,7 @@ const App: React.FC = () => {
       </main>
 
       <footer className="py-6 text-center text-slate-400 text-sm border-t border-slate-200 bg-white z-0">
-        &copy; {new Date().getFullYear()} Global Mining Corp. Inventory Systems.
+        &copy; 2026 Neuralix.Ai
       </footer>
     </div>
   );
