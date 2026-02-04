@@ -1,0 +1,5 @@
+{
+  "name": "MineStock AI",
+  "description": "Intelligent Inventory Optimization Dashboard for Mining Operations identifying material duplicates and obsolescence.",
+  "requestFramePermissions": []
+}
