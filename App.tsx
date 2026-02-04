@@ -12,7 +12,7 @@ const App: React.FC = () => {
   const [bulkData, setBulkData] = useState<MaterialProfile[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [history, setHistory] = useState<HistoryItem[]>([]);
-  
+
   // Side Sheet State
   const [sheetMode, setSheetMode] = useState<'hidden' | 'partial' | 'full'>('hidden');
 
@@ -70,13 +70,13 @@ const App: React.FC = () => {
       const results = await generateBulkAnalysis(codes);
       setBulkData(results);
       setViewState(ViewState.BULK);
-      
+
       if (!fromHistory) {
         const label = fileName ? `File: ${fileName}` : `Bulk Upload (${codes.length} items)`;
         addToHistory('UPLOAD', label, codes);
       }
     } catch (error) {
-       alert("Error processing file.");
+      alert("Error processing file.");
     } finally {
       setIsLoading(false);
     }
@@ -102,17 +102,17 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-900 overflow-x-hidden">
-      
+
       {/* Navigation Bar */}
       <nav className="sticky top-0 z-50 bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between shadow-sm">
-        <div 
-          className="flex items-center gap-2 cursor-pointer" 
+        <div
+          className="flex items-center gap-2 cursor-pointer"
           onClick={() => { setViewState(ViewState.HOME); setCurrentMaterial(null); setSheetMode('hidden'); }}
         >
           <div className="bg-blue-600 p-2 rounded-lg text-white">
             <LayoutGrid size={20} />
           </div>
-          <span className="text-xl font-bold tracking-tight text-slate-800">MineStock<span className="text-blue-600">AI</span></span>
+          <span className="text-xl font-bold tracking-tight text-slate-800">Material Inventory <span className="text-blue-600">Directory</span></span>
         </div>
 
         <div className="flex items-center gap-6">
@@ -132,8 +132,8 @@ const App: React.FC = () => {
       {/* Main Content Area */}
       <main className="flex-1 flex flex-col relative">
         {viewState === ViewState.HOME && (
-          <Dashboard 
-            onSearch={handleSearch} 
+          <Dashboard
+            onSearch={handleSearch}
             onUpload={handleBulkUpload}
             isLoading={isLoading}
             history={history}
@@ -142,8 +142,8 @@ const App: React.FC = () => {
         )}
 
         {viewState === ViewState.PROFILE && currentMaterial && (
-          <MaterialProfileView 
-            data={currentMaterial} 
+          <MaterialProfileView
+            data={currentMaterial}
             onBack={() => {
               if (bulkData.length > 0) {
                 setViewState(ViewState.BULK);
@@ -157,7 +157,7 @@ const App: React.FC = () => {
 
         {viewState === ViewState.BULK && (
           <>
-            <BulkView 
+            <BulkView
               data={bulkData}
               onBack={() => {
                 setViewState(ViewState.HOME);
@@ -168,52 +168,52 @@ const App: React.FC = () => {
             />
 
             {/* Side Sheet Overlay */}
-             <div 
-               className={`fixed inset-0 z-40 bg-slate-900/20 backdrop-blur-sm transition-opacity duration-300 ${sheetMode === 'hidden' ? 'opacity-0 pointer-events-none' : 'opacity-100'}`} 
-               onClick={() => setSheetMode('hidden')} 
-             />
+            <div
+              className={`fixed inset-0 z-40 bg-slate-900/20 backdrop-blur-sm transition-opacity duration-300 ${sheetMode === 'hidden' ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+              onClick={() => setSheetMode('hidden')}
+            />
 
-             {/* Side Sheet Content */}
+            {/* Side Sheet Content */}
             <div className={`fixed top-0 right-0 h-full bg-white z-50 shadow-2xl transform transition-all duration-300 ease-in-out border-l border-slate-200 overflow-hidden flex flex-col
               ${sheetMode === 'hidden' ? 'translate-x-full' : 'translate-x-0'}
               ${sheetMode === 'full' ? 'w-full' : 'w-[85vw] md:w-[70vw] lg:w-[60vw]'}
             `}>
               {/* Sheet Header */}
               <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-white flex-shrink-0">
-                 <h2 className="text-lg font-bold text-slate-800">Quick View</h2>
-                 <div className="flex items-center gap-2">
-                    <button 
-                      onClick={() => setSheetMode(sheetMode === 'full' ? 'partial' : 'full')} 
-                      className="p-2 hover:bg-slate-100 rounded-full text-slate-500 transition-colors" 
-                      title={sheetMode === 'full' ? "Collapse" : "Expand"}
-                    >
-                      {sheetMode === 'full' ? <Minimize2 size={20}/> : <Maximize2 size={20}/>}
-                    </button>
-                    <button 
-                      onClick={() => setSheetMode('hidden')} 
-                      className="p-2 hover:bg-slate-100 rounded-full text-slate-500 transition-colors" 
-                      title="Close"
-                    >
-                      <X size={20}/>
-                    </button>
-                 </div>
+                <h2 className="text-lg font-bold text-slate-800">Quick View</h2>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setSheetMode(sheetMode === 'full' ? 'partial' : 'full')}
+                    className="p-2 hover:bg-slate-100 rounded-full text-slate-500 transition-colors"
+                    title={sheetMode === 'full' ? "Collapse" : "Expand"}
+                  >
+                    {sheetMode === 'full' ? <Minimize2 size={20} /> : <Maximize2 size={20} />}
+                  </button>
+                  <button
+                    onClick={() => setSheetMode('hidden')}
+                    className="p-2 hover:bg-slate-100 rounded-full text-slate-500 transition-colors"
+                    title="Close"
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
               </div>
-              
+
               {/* Scrollable Content */}
               <div className="flex-1 overflow-y-auto bg-slate-50">
                 {currentMaterial && (
-                   <MaterialProfileView 
-                      data={currentMaterial} 
-                      onBack={() => {}} // Not used in sheet mode
-                      isSheet={true} 
-                    />
+                  <MaterialProfileView
+                    data={currentMaterial}
+                    onBack={() => { }} // Not used in sheet mode
+                    isSheet={true}
+                  />
                 )}
               </div>
             </div>
           </>
         )}
       </main>
-      
+
       <footer className="py-6 text-center text-slate-400 text-sm border-t border-slate-200 bg-white z-0">
         &copy; {new Date().getFullYear()} Global Mining Corp. Inventory Systems.
       </footer>

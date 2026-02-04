@@ -36,7 +36,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onSearch, onUpload, isLoading, hi
         .split(/\r?\n/)
         .map(row => row.split(',')[0].trim())
         .filter(code => code.length > 0 && code.toLowerCase() !== 'material code'); // basic header filtering
-      
+
       onUpload(codes, file.name);
     };
     reader.readAsText(file);
@@ -73,9 +73,9 @@ const Dashboard: React.FC<DashboardProps> = ({ onSearch, onUpload, isLoading, hi
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] w-full max-w-4xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-slate-800 mb-4">Inventory Intelligence</h1>
+        <h1 className="text-4xl font-bold text-slate-800 mb-4">Material Inventory Directory</h1>
         <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-          Discover duplicates, prevent overstocking, and optimize your mining supply chain. 
+          Discover duplicates, prevent overstocking, and optimize your mining supply chain.
           Enter a material code or upload a stock list to begin analysis.
         </p>
       </div>
@@ -90,7 +90,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onSearch, onUpload, isLoading, hi
             <h2 className="text-xl font-semibold text-slate-800">Quick Search</h2>
             <p className="text-slate-500 mt-2 text-sm">Analyze a specific material code for duplicates and specs.</p>
           </div>
-          
+
           <form onSubmit={handleSubmit} className="mt-auto">
             <div className="relative">
               <input
@@ -101,12 +101,12 @@ const Dashboard: React.FC<DashboardProps> = ({ onSearch, onUpload, isLoading, hi
                 className="w-full pl-4 pr-12 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
                 disabled={isLoading}
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={isLoading || !searchInput}
                 className="absolute right-2 top-2 p-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-slate-300 transition-colors"
               >
-                {isLoading ? <Loader2 className="animate-spin" size={20}/> : <Search size={20} />}
+                {isLoading ? <Loader2 className="animate-spin" size={20} /> : <Search size={20} />}
               </button>
             </div>
           </form>
@@ -122,29 +122,29 @@ const Dashboard: React.FC<DashboardProps> = ({ onSearch, onUpload, isLoading, hi
             <p className="text-slate-500 mt-2 text-sm">Upload a CSV list of material codes to audit an entire category.</p>
           </div>
 
-          <div 
+          <div
             className={`mt-auto border-2 border-dashed rounded-lg p-6 text-center transition-colors cursor-pointer relative ${dragActive ? 'border-emerald-500 bg-emerald-50' : 'border-slate-200 hover:border-emerald-400'}`}
             onDragEnter={handleDrag}
             onDragLeave={handleDrag}
             onDragOver={handleDrag}
             onDrop={handleDrop}
           >
-            <input 
-              type="file" 
+            <input
+              type="file"
               accept=".csv,.txt"
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               onChange={handleFileChange}
               disabled={isLoading}
             />
             <div className="flex flex-col items-center justify-center text-slate-500">
-              <Upload size={24} className="mb-2 text-slate-400"/>
+              <Upload size={24} className="mb-2 text-slate-400" />
               <span className="text-sm font-medium">Click to upload or drag & drop</span>
               <span className="text-xs text-slate-400 mt-1">CSV or Text files</span>
             </div>
           </div>
         </div>
       </div>
-      
+
       {/* Recent Activity Section */}
       {history.length > 0 && (
         <div className="w-full max-w-4xl animate-fade-in">
@@ -154,8 +154,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onSearch, onUpload, isLoading, hi
           </div>
           <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden divide-y divide-slate-100">
             {history.map((item) => (
-              <div 
-                key={item.id} 
+              <div
+                key={item.id}
                 onClick={() => onHistorySelect(item)}
                 className="group flex items-center justify-between p-4 hover:bg-slate-50 cursor-pointer transition-colors"
               >
@@ -183,11 +183,11 @@ const Dashboard: React.FC<DashboardProps> = ({ onSearch, onUpload, isLoading, hi
           <span>Analyzing inventory data with AI...</span>
         </div>
       )}
-      
+
       {!apiKeyPresent() && (
         <div className="mt-8 p-4 bg-amber-50 text-amber-800 rounded-lg flex items-center border border-amber-200 text-sm max-w-lg">
-           <AlertCircle size={18} className="mr-2 flex-shrink-0" />
-           <span>Demo Mode: API Key not detected. Using mock data for demonstration.</span>
+          <AlertCircle size={18} className="mr-2 flex-shrink-0" />
+          <span>Demo Mode: API Key not detected. Using mock data for demonstration.</span>
         </div>
       )}
     </div>
@@ -196,10 +196,10 @@ const Dashboard: React.FC<DashboardProps> = ({ onSearch, onUpload, isLoading, hi
 
 // Helper to check environment variable availability (simulated for frontend code)
 const apiKeyPresent = () => {
-    // In a real build, we'd check process.env.API_KEY, but here we just want to suppress the warning if the user didn't set it.
-    // For this generated code, we assume if process.env.API_KEY is defined in the Service, it's fine.
-    // This is just a UI helper.
-    return true; 
+  // In a real build, we'd check process.env.API_KEY, but here we just want to suppress the warning if the user didn't set it.
+  // For this generated code, we assume if process.env.API_KEY is defined in the Service, it's fine.
+  // This is just a UI helper.
+  return true;
 }
 
 export default Dashboard;
